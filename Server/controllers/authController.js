@@ -40,6 +40,25 @@ const Signup = async (req, res) => {
 const Login = async (req, res) => {
     const {email, password} = req.body
     // Check if email exist 
+    const userMail = await User.findOne({email});
+    if(!userMail){
+        res.send(404).json({status: false, message: "Email doesn't exist"})
+    }
     // Compare the password with the hashed password 
+    const correctDetails = await bcrypt.compare(password, userMail.password)
+    if(!correctDetails){
+        res.send(500).json({status: false, message: "Invalid password"});
+    }
     // if true then generate a token 
+       // Then also generate the token for the user.
+        const token = jwt.sign({name,email,subscriptionActve}, process.env.JWTSecretKey, {expiresIn: "30d"});
+    res.send(200).json({
+        status: true,  
+        name: userMail.name,
+        email: userMail.email,
+        skillLevel: userMail.skillLevel,
+        learningGoal: userMail.learningGoal,
+        subscriptionActive: userMail.subscriptionActive,})
 }
+
+module.exports = {Login, Signup}
