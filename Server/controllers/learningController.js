@@ -10,7 +10,9 @@ exports.updateLearningProfile = async (req, res) => {
         };
         user.skillLevel = skillLevel || user.skillLevel;
         user.learningGoal = learningGoal || user.learningGoal;
+
+        await user.save();
     } catch (error) {
-        
+        res.status(500).json({message: "Server Error"})
     }
 }
