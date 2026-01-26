@@ -16,7 +16,6 @@ exports.getDashboard = async (req, res) => {
             }
         })
     } catch (error) {
-        // My error code here
         res.status(500).json({message: "Server erro"})
     }
 }
