@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const {protect} = require("../middleware/authMiddleware.js")
-const {updateLearningprofile} = require("../controllers/learningController.js")
+const {updateLearningProfile} = require("../controllers/learningController.js")
 
-router.put("/profile", protect, updateLearningprofile);
+router.put("/profile", protect, updateLearningProfile);
 
-module.exports = router 
+module.exports = router;

@@ -3,12 +3,18 @@ const env = require("dotenv").config()
 const cors = require("cors");
 const ConnectDB = require("./config/db.js");
 const authRoute = require("./routes/authRoutes.js");
+const learningRoutes = require("./routes/learningRoutes.js")
+const dashboardRoute = require("./routes/dashboardRoute.js")
+
+const app = express();
+app.use(cors());
+app.use(express.json()); 
+// app.use(express.urlencoded({ extended: true }));
 
 ConnectDB();
-const app = express();
 app.use("/auth", authRoute)
-app.use(cors());
-app.use(express.json());
+app.use("api/learning", learningRoutes)
+app.use("api/dashboard", dashboardRoute)
 
 // ROutes 
 app.get("/", (req, res) =>{
