@@ -13,8 +13,8 @@ app.use(express.json());
 
 ConnectDB();
 app.use("/auth", authRoute)
-app.use("api/learning", learningRoutes)
-app.use("api/dashboard", dashboardRoute)
+app.use("/api/learning", learningRoutes)
+app.use("/api/dashboard", dashboardRoute)
 
 // ROutes 
 app.get("/", (req, res) =>{

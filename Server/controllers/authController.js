@@ -17,7 +17,7 @@ const Signup = async (req, res) => {
 
     
         // Then also generate the token for the user.
-        const token = jwt.sign({name,email}, process.env.JWTSecretKey, {expiresIn: "30d"})
+        const token = jwt.sign({userId: User._id}, process.env.JWTSecretKey, {expiresIn: "30d"})
         console.log(`Token: ${token}`);        
 
         // Save the user details to the database
@@ -53,15 +53,15 @@ const Login = async (req, res) => {
     }
     // if true then generate a token 
        // Then also generate the token for the user.
-        const token = jwt.sign({email}, process.env.JWTSecretKey, {expiresIn: "30d"});
-    res.status(200).json({
-        status: true,  
-        name: userMail.name,
-        email: userMail.email,
-        skillLevel: userMail.skillLevel,
-        learningGoal: userMail.learningGoal,
-        token: token,
-        subscriptionActive: userMail.subscriptionActive,})
+        const token = jwt.sign({userId: User._id}, process.env.JWTSecretKey, {expiresIn: "30d"});
+        return res.status(200).json({
+            status: true,  
+            name: userMail.name,
+            email: userMail.email,
+            skillLevel: userMail.skillLevel,
+            learningGoal: userMail.learningGoal,
+            token: token,
+            subscriptionActive: userMail.subscriptionActive,})
 }
 
 module.exports = {Login, Signup}

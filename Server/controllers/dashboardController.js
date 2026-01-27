@@ -2,7 +2,7 @@ const User = require("../models/UserModel.js");
 
 exports.getDashboard = async (req, res) => {
     try {
-        const user = await User.findOne(req.user.email);
+        const user = await User.findOne({userId: req.user._Id});
         res.json({
             name: user.name,
             email: user.email,
@@ -16,6 +16,6 @@ exports.getDashboard = async (req, res) => {
             }
         })
     } catch (error) {
-        res.status(500).json({message: "Server erro"})
+        res.status(500).json({message: "Server error"})
     }
 }

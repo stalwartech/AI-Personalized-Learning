@@ -8,9 +8,12 @@ const protect = async (req, res, next) => {
         try {
             token = req.headers.authorization.split(" ")[1];
             const decoded = jwt.verify(token, process.env.JWTSecretKey);
-            req.user = await User.findOne(decoded.email);
+            req.user = await User.findOne({userId: decoded._id});
+            console.log(req.user);
+
             next()
         } catch (error) {
+            console.log(error.message);
             return res.status(401).json({message: "Not authorized, token is failed"})
         }
     }
