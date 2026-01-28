@@ -1,26 +1,28 @@
-const {generateAIContent} = require("../Services/geminiService.js");
-const {buildLearningPrompt} = require("../utils/aiPrompBuilder.js");
+const { generateLearningContent } = require("../Services/aiOrOrchestrator");
+const { buildLearningPrompt } = require("../utils/aiPrompBuilder");
+const { cleanJson } = require("../utils/cleanJson");
 
 exports.generateTopicContent = async (req, res) => {
-    try {
-        const {topic, level } = req.body;
+  try {
+    const { topic, level, provider } = req.body;
 
-        const prompt = buildLearningPrompt(topic, level);
-        console.log(prompt);
-        
-        const aiResponse = await generateAIContent(prompt)
+    const prompt = buildLearningPrompt(topic, level);
+    const aiResponse = await generateLearningContent(prompt, provider);
 
-        return res.status(200).json({
-            success: true,
-            data: JSON.parse(aiResponse)
-        })
-        
-    } catch (error) {
-        return res.status(500).json({
-            success: false, 
-            message: "AI generation failed",
-            error: error.message
-        })
-        
-    }
-}
+    const parsedData = JSON.parse(cleanJson(aiResponse));
+
+    res.status(200).json({
+      success: true,
+      data: parsedData
+    });
+
+  } catch (error) {
+    console.error("AI ERROR:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "AI generation failed",
+      error: error.message
+    });
+  }
+};

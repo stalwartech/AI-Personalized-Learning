@@ -1,9 +1,16 @@
-const genAI = require("../config/gemini.js")
-const model = genAI.getGenerativeModel({model: "gemini-1.5-pro"})
+const { GoogleGenAI } = require("@google/genai");
+
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
 async function generateAIContent(prompt) {
-    const result = await model.generateContent(prompt);
-    return result.response.text();
+  const response = await ai.models.generateContent({
+    model: "gemini-3-flash-flash",
+    contents: prompt,
+  });
+
+  return response.text;
 }
 
-module.exports = {generateAIContent};
+module.exports = { generateAIContent };
