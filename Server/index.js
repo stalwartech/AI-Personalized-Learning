@@ -1,13 +1,13 @@
 const express = require("express");
-const env = require("dotenv").config()
+const env = require("dotenv").config();
 const cors = require("cors");
 const ConnectDB = require("./config/db.js");
 const authRoute = require("./routes/authRoutes.js");
-const learningRoutes = require("./routes/learningRoutes.js")
+const learningRoutes = require("./routes/learningRoutes.js");
 const dashboardRoute = require("./routes/dashboardRoute.js");
-const aiRoute = require("./routes/aiRoutes.js")
-const exerciseRoute = require("./routes/exerciseRoute.js")
+const aiRoute = require("./routes/aiRoutes.js");
 const progressRoute = require("./routes/progressRoute.js")
+const exerciseRoute = require("./routes/exerciseRoute.js")
 
 const app = express();
 app.use(cors());
@@ -20,7 +20,7 @@ app.use("/api/learning", learningRoutes)
 app.use("/api/dashboard", dashboardRoute)
 app.use("/",aiRoute)
 // app.use("/", exerciseRoute)
-// app.use("/", progressRoute)
+app.use("/api/progress", progressRoute)
 
 // ROutes 
 app.get("/", (req, res) =>{

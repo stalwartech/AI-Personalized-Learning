@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const {submitExercise} = require("../controllers/exerciseController.js");
-const auth = require("../middleware/authMiddleware.js")
+const {protect} = require("../middleware/authMiddleware.js")
 
-router.post("/submit", auth, submitExercise);
+router.post("/submit", protect, submitExercise);
 
 module.exports = router;
