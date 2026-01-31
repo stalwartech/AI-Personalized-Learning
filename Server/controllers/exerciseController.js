@@ -5,7 +5,7 @@ exports.submitExercise = async (req, res) => {
     const { topicId, exerciseIndex, userAnswer, correct } = req.body;
 
     const attempt = await ExerciseAttempt.create({
-      user: req.user.userId, // or req.user._id
+      user: req.user.userId, // or req.use
       topic: topicId,
       exerciseIndex,
       userAnswer,
@@ -17,6 +17,7 @@ exports.submitExercise = async (req, res) => {
       success: true,
       attempt,
     });
+
 
   } catch (error) {
     res.status(500).json({
