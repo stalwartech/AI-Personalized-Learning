@@ -8,6 +8,7 @@ const dashboardRoute = require("./routes/dashboardRoute.js");
 const aiRoute = require("./routes/aiRoutes.js");
 const progressRoute = require("./routes/progressRoute.js")
 const exerciseRoute = require("./routes/exerciseRoute.js")
+const paymentRoute = require("./routes/paymentRoutes")
 
 const app = express();
 app.use(cors());
@@ -21,6 +22,7 @@ app.use("/api/dashboard", dashboardRoute)
 app.use("/",aiRoute)
 app.use("/", exerciseRoute)
 app.use("/api/progress", progressRoute)
+app.use("/api/payment", paymentRoute);
 
 // ROutes 
 app.get("/", (req, res) =>{
