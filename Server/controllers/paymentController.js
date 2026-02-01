@@ -7,7 +7,7 @@ exports.initializePayment = async (req, res) => {
     "https://api.paystack.co/transaction/initialize",
     {
       email: req.user.email,
-      amount: amount * 100
+      amount: amount * 100 //The amount is in kobo so it will be converted to naira
     },
     {
       headers: {
