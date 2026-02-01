@@ -1,4 +1,3 @@
-
 const axios = require("axios");
 
 exports.initializePayment = async (req, res) => {
@@ -12,7 +11,8 @@ exports.initializePayment = async (req, res) => {
     },
     {
       headers: {
-        Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`
+        Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+        "Content-Type": "application/json"
       }
     }
   );
