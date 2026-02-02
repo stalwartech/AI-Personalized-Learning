@@ -15,6 +15,7 @@ exports.generateTopicContent = async (req, res) => {
       success: true,
       data: parsedData
     });
+  
 
   } catch (error) {
     console.error("AI ERROR:", error);
