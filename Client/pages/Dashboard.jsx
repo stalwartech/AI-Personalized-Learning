@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../src/api/axios.js"
+import api from "../api/axios.js"
 import CertificateCard from "../components/CertificateCard";
 import ProgressBar from "../components/ProgressBar";
 

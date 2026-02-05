@@ -1,15 +1,22 @@
-import axios from "axios";
+import { createContext, useState } from "react";
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-});
+export const AuthContext = createContext(null);
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-export default api;
+  const login = (token) => {
+    localStorage.setItem("token", token);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, setUser, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
