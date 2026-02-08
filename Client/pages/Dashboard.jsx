@@ -20,9 +20,10 @@ export default function Dashboard() {
 
       <h2 className="mt-4 font-semibold">Certificates</h2>
       <div className="grid grid-cols-2 gap-4">
-        {data.certificates.map(cert => (
-          <CertificateCard key={cert.certificateId} cert={cert} />
-        ))}
+        {data.certificates?.map(cert => (
+  <CertificateCard key={cert.certificateId} cert={cert} />
+))}
+
       </div>
     </div>
   );

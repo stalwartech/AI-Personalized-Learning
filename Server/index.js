@@ -18,7 +18,7 @@ app.use(express.json());
 ConnectDB();
 app.use("/auth", authRoute)
 app.use("/api/learning", learningRoutes)
-app.use("/api/dashboard", dashboardRoute)
+app.use("/dashboard", dashboardRoute)
 app.use("/",aiRoute)
 app.use("/", exerciseRoute)
 app.use("/api/progress", progressRoute)
